@@ -1,0 +1,64 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-image: url("./images/sfondo-login.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.sendButton {
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 1vh;
+    text-decoration: none;
+    color: white;
+    background-color: green;
+}
+
+.sendButtonDelete {
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 1vh;
+    text-decoration: none;
+    color: white;
+    background-color: red;
+}
+
+.divForm {
+    text-align: center;
+    border: 5px solid black;
+    border-radius: 3vh;
+    padding: 50px;
+    background-color: white;
+    margin: auto;
+}
+
+.divShowData {
+    text-align: center;
+    border: 5px solid black;
+    border-radius: 3vh;
+    padding: 50px;
+    background-color: white;
+    margin: auto;
+}
+
+.correct {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+td, th {
+    border: 2px solid black;
+}
