@@ -1,9 +1,14 @@
+<?php
+    include("../connessione.php");
+    session_start();
+    session_unset();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAGINA LOGIN</title>
+    <title>BENVENUTO</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -13,20 +18,18 @@
         <i class="bi bi-cup-hot textStartPage"> Restaurant</i>
     </div>
 
-    <!-- div form -->
-    <div class="divForm">
-        <h1><b>LOGIN</b></h1>
-        <br>
-        <form action="scriptlogin.php" method="post">
-            <label>Username:</label><br>
-            <input type="text" name="username"><br><br>
-            <label>Password:</label><br>
-            <input type="text" name="password">
-            <br>
-            <br>
-            <input class="sendButton" type="submit" value="Login">
-        </form>
-    </div>
+    <?php
+        showData();
+
+        function showData() {
+            echo "<div class='divShowData'>";
+                echo "<h1 class='correct'>LOGOUT EFFETTUATO!</h1>";
+                echo "<br>";
+                echo "<br>";
+                echo "<a class='sendButton' href='paginalogin.html'>Login</a>";
+            echo "</div>";
+        }
+    ?>
 
     <!-- div di fondo pagina -->
     <div class="divEndPage">
