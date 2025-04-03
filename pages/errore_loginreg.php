@@ -40,7 +40,7 @@
             </tr>
         </table>
         <br>
-        <p class="textEndPage"><b><i>&copy; 2025 Nome Azienda. Tutti i diritti riservati.</i></b></p>
+        <p class="textEndPage"><b><i>&copy; 2025 Restaurant. Tutti i diritti riservati.</i></b></p>
         <p class="textEndPage"><b><i>Questo sito e i suoi contenuti sono protetti dalle leggi sul copyright. È vietata la riproduzione, distribuzione o utilizzo non autorizzato senza consenso scritto.</i></b></p>
     </div>
     
