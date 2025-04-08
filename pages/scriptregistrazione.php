@@ -2,7 +2,6 @@
     include("../connessione.php");
     session_start();
     $_SESSION["mesErrore"] = "503 - CONNESSIONE NON RIUSCITA";
-    $_SESSION["utente"] = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,35 +19,39 @@
     </div>
 
     <?php
-        $username = $_POST["username"];
-        $pass = $_POST["password"];
-        $password = hash("sha256",$pass);
+        $user = $_POST["username"];
+        $passwd = $_POST["password"];
+        $nome = $_POST["nome"];
+        $cognome = $_POST["cognome"];
+        $email = $_POST["email"];
 
-        $sql = "SELECT u.username, u.passwd FROM `utente` as u";
+        $sql = "SELECT `username`,`email` FROM `utente`";
         $res = $conn->query($sql);
         if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
                 $utenti[] = $row;
             }
-            if (controlUsername($utenti, $username)) {
-                if (controlPassword($utenti, $password)) { 
-                    foreach ($utenti as $utente) {
-                        if (($utente["username"] === $username) && ($utente["passwd"] === $password)) {
-                            $_SESSION["utente"] = $username;
-                            header("Location: benvenuto.php");
-                            exit;
-                        }
+            if (controlUsername($utenti, $user)) {
+                if (controlEmail($utenti, $email)) {
+                    $passwdHash = hash("sha256",$passwd);
+                    $sql2 = "INSERT INTO utente (username, passwd, nome, cognome, email) VALUES ('$user','$passwdHash','$nome','$cognome','$email')";
+                    $res2 = $conn->query($sql2);
+                    if ($res2) {
+                        $_SESSION["utente"] = $user;
+                        header("Location: benvenuto.php");
+                        exit;
+                    } else {
+                        $_SESSION["mesErrore"] = "ERRORE NELL'INSERIMENTO";
+                        header("Location: errore_loginreg.php");
+                        exit;
                     }
-                    $_SESSION["mesErrore"] = "USERNAME E PASSWORD NON COMPATIBILI";
-                    header("Location: errore_loginreg.php");
-                    exit;
                 } else {
-                    $_SESSION["mesErrore"] = "PASSWORD INESISTENTE";
-                    header("Location: errore_loginreg.php");
-                    exit;
+                    $_SESSION["mesErrore"] = "EMAIL GIA' ESISTENTE";
+                        header("Location: errore_loginreg.php");
+                        exit;
                 }
             } else {
-                $_SESSION["mesErrore"] = "USERNAME INESISTENTE";
+                $_SESSION["mesErrore"] = "USERNAME GIA' ESISTENTE";
                 header("Location: errore_loginreg.php");
                 exit;
             }
@@ -56,25 +59,25 @@
             header("Location: errore_loginreg.php");
             exit;
         }
-
+        
         //Funzione per controllare se l'username inserito esiste
         function controlUsername($u, $un){
             foreach ($u as $utente) {
                 if (($utente["username"] === $un)) {
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
 
         //Funzione per controllare se la password inserita esiste
-        function controlPassword($u, $pass){
+        function controlEmail($u, $e){
             foreach ($u as $utente) {
-                if (($utente["passwd"] === $pass)) {
-                    return true;
+                if (($utente["email"] === $e)) {
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
     ?>
 

@@ -104,8 +104,18 @@ td, th {
     font-family: "Gravitas One", serif;
 }
 
-input {
+input{
     background-color: rgba(17, 24, 39, 1);
     border: 1px solid rgba(55, 65, 81, 1);
     color: white;
 }
+
+.divShowData li{
+    color: white;
+    text-align: left;
+}
+
+.divShowData p{
+    color: white;
+}
+

@@ -18,11 +18,25 @@
     </div>
 
     <?php
-        showData();
-
-        function showData() {
+        $ut = $_SESSION["utente"];
+        $sql = "SELECT username, nome, cognome, email, dataRegistrazione FROM utente WHERE username = '$ut'";
+        $res = $conn->query($sql);
+        if ($res->num_rows > 0) {
+            $row = $res->fetch_assoc();
+            showData($row);
+            
+        }
+        
+        //Funzione per mostrare il benvenuto (con parte grafica)
+        function showData($list) {
             echo "<div class='divShowData'>";
-                echo "<h1 class='correct'>BENVENUTO " . $_SESSION["utenteLogin"] . "!</h1>";
+                echo "<h1 class='correct'>BENVENUTO " . $_SESSION["utente"] . "!</h1>";
+                echo "<p><b><i>Dati Utente:</i></b></p>";
+                    echo "<ul>";
+                    foreach ($list as $key=>$value) {
+                        echo "<li><b>$key: </b><i>$value</i></li>";
+                    }
+                    echo "</ul>";
                 echo "<br>";
                 echo "<br>";
                 echo "<a class='sendButton' href='scriptlogout.php'>Logout</a>";

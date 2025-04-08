@@ -27,6 +27,8 @@
                 echo "<br>";
                 echo "<br>";
                 echo "<a class='sendButton' href='paginalogin.html'>Login</a>";
+                echo "<hr>";
+                echo "<a class='sendButton' href='paginaregistrazione.html'>Signin</a>";
             echo "</div>";
         }
     ?>
