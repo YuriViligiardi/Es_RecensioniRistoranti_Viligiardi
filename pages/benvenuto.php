@@ -38,7 +38,6 @@
                     }
                     echo "</ul>";
                 echo "<br>";
-                echo "<br>";
                 echo "<a class='sendButton' href='scriptlogout.php'>Logout</a>";
             echo "</div>";
         }

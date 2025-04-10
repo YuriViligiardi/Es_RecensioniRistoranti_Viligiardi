@@ -27,7 +27,13 @@ body {
     border-radius: 1vh;
     text-decoration: none;
     color: white;
+    width: 20%;
     background-color: red;
+}
+
+.sendButtonRegistration {
+    text-decoration-line: none;
+    color: rgba(167, 139, 250);
 }
 
 .divstartPages {
@@ -119,3 +125,27 @@ input{
     color: white;
 }
 
+input, .sendButton {
+    width: 90%; 
+    box-sizing: border-box; 
+}
+
+input {
+    margin-bottom: 10px; 
+}
+
+.sendButton, .sendButtonDelete {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.errorMessage {
+    /* background-color: #fa5e55; */
+    color: whitesmoke;
+    /* background-color: rgba(208, 53, 51, 0.6); */
+    background-color: rgba(250, 94, 85, 0.8);
+    padding: 10px;
+}

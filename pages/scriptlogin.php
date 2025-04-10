@@ -39,21 +39,21 @@
                             exit;
                         }
                     }
-                    $_SESSION["mesErrore"] = "USERNAME E PASSWORD NON COMPATIBILI";
-                    header("Location: errore_loginreg.php");
+                    $_SESSION["mesErrore"] = "Username & Password non compatibili";
+                    header("Location: paginalogin.php");
                     exit;
                 } else {
-                    $_SESSION["mesErrore"] = "PASSWORD INESISTENTE";
-                    header("Location: errore_loginreg.php");
+                    $_SESSION["mesErrore"] = "Password inesistente";
+                    header("Location: paginalogin.php");
                     exit;
                 }
             } else {
-                $_SESSION["mesErrore"] = "USERNAME INESISTENTE";
-                header("Location: errore_loginreg.php");
+                $_SESSION["mesErrore"] = "Username inesistente";
+                header("Location: paginalogin.php");
                 exit;
             }
         } else {
-            header("Location: errore_loginreg.php");
+            header("Location: paginalogin.php");
             exit;
         }
 

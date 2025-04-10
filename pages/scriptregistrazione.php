@@ -25,6 +25,12 @@
         $cognome = $_POST["cognome"];
         $email = $_POST["email"];
 
+        if ($user === "" || $passwd === "" || $nome === "" || $cognome === "" || $email === "") {
+            $_SESSION["mesErrore"] = "Dati non inseriti correttamente";
+            header("Location: paginaregistrazione.php");
+            exit;
+        }
+
         $sql = "SELECT `username`,`email` FROM `utente`";
         $res = $conn->query($sql);
         if ($res->num_rows > 0) {
@@ -41,22 +47,22 @@
                         header("Location: benvenuto.php");
                         exit;
                     } else {
-                        $_SESSION["mesErrore"] = "ERRORE NELL'INSERIMENTO";
-                        header("Location: errore_loginreg.php");
+                        $_SESSION["mesErrore"] = "Errore nell'inserimento";
+                        header("Location: paginaregistrazione.php");
                         exit;
                     }
                 } else {
-                    $_SESSION["mesErrore"] = "EMAIL GIA' ESISTENTE";
-                        header("Location: errore_loginreg.php");
+                    $_SESSION["mesErrore"] = "Email già esistente";
+                        header("Location: paginaregistrazione.php");
                         exit;
                 }
             } else {
-                $_SESSION["mesErrore"] = "USERNAME GIA' ESISTENTE";
-                header("Location: errore_loginreg.php");
+                $_SESSION["mesErrore"] = "Username già esistente";
+                header("Location: paginaregistrazione.php");
                 exit;
             }
         } else {
-            header("Location: errore_loginreg.php");
+            header("Location: paginaregistrazione.php");
             exit;
         }
         

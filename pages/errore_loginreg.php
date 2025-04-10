@@ -24,7 +24,6 @@
             echo "<div class='divShowData'>";
                 echo "<h1 class='error'>" . $_SESSION["mesErrore"] . "!</h1>";
                 echo "<br>";
-                echo "<br>";
                 echo "<a class='sendButtonDelete' href='paginalogin.html'>Login</a>";
                 echo "<hr>";
                 echo "<a class='sendButtonDelete' href='paginaregistrazione.html'>Signin</a>";

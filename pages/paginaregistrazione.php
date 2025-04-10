@@ -1,3 +1,7 @@
+<?php
+    include("../connessione.php");
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +18,15 @@
     </div>
 
     <!-- div form -->
-    <div class="divForm">
+    <div class="divForm mb-5">
         <h1><b>REGISTRAZIONE</b></h1>
         <br>
+        <?php 
+            if (isset($_SESSION["mesErrore"])) {
+                echo "<p class='errorMessage'><i>" .$_SESSION["mesErrore"] . "</i></p>";
+                unset($_SESSION["mesErrore"]);
+            }
+        ?>
         <form action="scriptregistrazione.php" method="post">
             <label>Username:</label><br>
             <input type="text" name="username"><br><br>
@@ -33,7 +43,7 @@
             <input class="sendButton" type="submit" value="Signin">
         </form>
         <hr>
-        <a class="sendButton" href="paginalogin.html">Login</a>
+        <span><b><i>Sei già registrato? </i></b></span><a class="sendButtonRegistration" href="paginalogin.php"><b><i>Accedi</i></b></a>
     </div>
 
     <!-- div di fondo pagina -->
