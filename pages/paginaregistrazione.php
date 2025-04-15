@@ -23,7 +23,10 @@
         <br>
         <?php 
             if (isset($_SESSION["mesErrore"])) {
-                echo "<p class='errorMessage'><i>" .$_SESSION["mesErrore"] . "</i></p>";
+                echo "<div class='errorMessage'>";
+                    echo "<span><i>" .$_SESSION["mesErrore"] . "   </i></span>";
+                    echo "<i onclick='location.reload()' class='bi bi-x-square' style='font-size: 20px;'></i>";
+                echo "</div>";
                 unset($_SESSION["mesErrore"]);
             }
         ?>
