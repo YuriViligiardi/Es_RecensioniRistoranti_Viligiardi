@@ -33,7 +33,7 @@
 
         $sql = "SELECT `username`,`email` FROM `utente`";
         $res = $conn->query($sql);
-        if ($res->num_rows > 0) {
+        
             while ($row = $res->fetch_assoc()) {
                 $utenti[] = $row;
             }
@@ -61,10 +61,9 @@
                 header("Location: paginaregistrazione.php");
                 exit;
             }
-        } else {
-            header("Location: paginaregistrazione.php");
-            exit;
-        }
+        
+        header("Location: paginaregistrazione.php");
+        exit;
         
         //Funzione per controllare se l'username inserito esiste
         function controlUsername($u, $un){

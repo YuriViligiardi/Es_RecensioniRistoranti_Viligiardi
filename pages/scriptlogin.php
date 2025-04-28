@@ -26,7 +26,7 @@
 
         $sql = "SELECT u.username, u.passwd FROM `utente` as u";
         $res = $conn->query($sql);
-        if ($res->num_rows > 0) {
+        
             while ($row = $res->fetch_assoc()) {
                 $utenti[] = $row;
             }
@@ -52,11 +52,10 @@
                 header("Location: paginalogin.php");
                 exit;
             }
-        } else {
-            header("Location: paginalogin.php");
-            exit;
-        }
-
+        
+        header("Location: paginalogin.php");
+        exit;
+        
         //Funzione per controllare se l'username inserito esiste
         function controlUsername($u, $un){
             foreach ($u as $utente) {

@@ -28,7 +28,7 @@
                 echo "<br>";
                 echo "<a class='sendButton' href='paginalogin.php'>Login</a>";
                 echo "<hr>";
-                echo "<a class='sendButton' href='paginaregistrazione.html'>Signin</a>";
+                echo "<a class='sendButton' href='paginaregistrazione.php'>Signin</a>";
             echo "</div>";
         }
     ?>

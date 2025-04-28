@@ -150,3 +150,29 @@ input {
     padding: 10px;
     margin-bottom: 8px;
 }
+
+.scrollBar {
+    width: auto;
+    height: auto;
+    overflow-y: scroll; /* Abilita la scrollbar verticale */
+    overflow-x: auto; /* Abilita la scrollbar orizzontale, se necessario */
+}
+
+/* Personalizzazione della scrollbar */
+.scrollBar::-webkit-scrollbar {
+    width: 8px; /* Larghezza della scrollbar */
+    height: 8px; /* Altezza della scrollbar */
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+    background: rgba(167, 139, 250, 0.8); /* Colore del thumb */
+    border-radius: 10px; /* Arrotonda il thumb */
+}
+
+.scrollBar::-webkit-scrollbar-thumb:hover {
+    background: rgba(167, 139, 250, 1); /* Colore del thumb al passaggio del mouse */
+}
+
+.scrollBar::-webkit-scrollbar-track {
+    background: rgba(17, 24, 39, 0.9); /* Colore del track */
+}
