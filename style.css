@@ -143,36 +143,46 @@ input {
 }
 
 .errorMessage {
-    /* background-color: #fa5e55; */
     color: whitesmoke;
-    /* background-color: rgba(208, 53, 51, 0.6); */
     background-color: rgba(250, 94, 85, 0.8);
     padding: 10px;
     margin-bottom: 8px;
 }
 
-.scrollBar {
-    width: auto;
-    height: auto;
-    overflow-y: scroll; /* Abilita la scrollbar verticale */
-    overflow-x: auto; /* Abilita la scrollbar orizzontale, se necessario */
+.title, .labelDivShowData{
+    color: white;
 }
 
-/* Personalizzazione della scrollbar */
-.scrollBar::-webkit-scrollbar {
-    width: 8px; /* Larghezza della scrollbar */
-    height: 8px; /* Altezza della scrollbar */
+.normalInput {
+    width: 10%;
 }
 
-.scrollBar::-webkit-scrollbar-thumb {
-    background: rgba(167, 139, 250, 0.8); /* Colore del thumb */
-    border-radius: 10px; /* Arrotonda il thumb */
+.labelStar {
+    color: goldenrod;
 }
 
-.scrollBar::-webkit-scrollbar-thumb:hover {
-    background: rgba(167, 139, 250, 1); /* Colore del thumb al passaggio del mouse */
+.styled-select {
+    width: 40%;
+    padding: 8px;
+    font-size: 16px;
+    color: white;
+    /* background-color: rgba(17, 24, 39, 1); */
+    background-color: rgb(19, 30, 54);
+    border: 1px solid rgba(55, 65, 81, 1);
+    border-radius: 1vh;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
 }
 
-.scrollBar::-webkit-scrollbar-track {
-    background: rgba(17, 24, 39, 0.9); /* Colore del track */
+.styled-select:hover {
+    border-color: rgba(167, 139, 250);
+    background-color: rgba(24, 31, 48, 1);
+}
+
+.styled-select option {
+    background-color: rgba(17, 24, 39, 1);
+    color: white;
 }

@@ -23,15 +23,24 @@
         $res = $conn->query($sql);
         if ($res->num_rows > 0) {
             $row = $res->fetch_assoc();
+
             $sql2 = "SELECT COUNT(r.idrecensione) numRecensioni FROM recensione r JOIN utente u ON r.idutente = u.id WHERE u.username = '" . $_SESSION["utente"] . "'";
             $res2 = $conn->query($sql2);
             $row2 = $res2->fetch_assoc();
             showData($row, $row2['numRecensioni']);
+
+            $listRest = [];
+            $sql3 = "SELECT r.nome FROM `ristorante` as r";
+            $res3 = $conn->query($sql3);
+                while ($row3 = $res3->fetch_assoc()) {
+                    $listRest[] = $row3;
+                }
+            createNewRec($listRest);
         }
         
         //Funzione per mostrare il benvenuto (con parte grafica)
         function showData($list, $nr) {
-            echo "<div class='divShowData scrollBar'>";
+            echo "<div class='divShowData'>";
                     echo "<h1 class='correct'>BENVENUTO " . $_SESSION["utente"] . "!</h1>";
                     echo "<p><b><i>Dati Utente:</i></b></p>";
                         echo "<ul>";
@@ -50,15 +59,33 @@
                         //     echo "</tr>";
                         // echo "</table>";
                     }
-                    // echo "<br>";
-                    //     echo "<form action='inseriscirecensione.php' method='post'>";
-                    //         echo "<label>Username:</label><br>";
-                    //         echo "<input type='text' name='username'><br><br>";
-                    //         echo "<label>Password:</label><br>";
-                    //         echo "<input type='password' name='password'>";
-                    //     echo "</form>";
                     echo "<br>";
                     echo "<a class='sendButton' href='scriptlogout.php'>Logout</a>";
+            echo "</div>";
+        }
+
+        //Funzione per mostrare la form per la creazione di una nuova recensione (con parte grafica)
+        function createNewRec($lr){
+            echo "<div class='divShowData title'>";
+                echo "<h1>NUOVA RECENSIONE</h1>";
+                echo "<form action='inseriscirecensione.php' method='post'>";
+                echo "<label>Scegli un ristorante:</label><br>";
+                    echo "<select id='ristorante' class='styled-select'>";
+                        foreach ($lr as $value) {
+                            echo "<option value='{$value['nome']}'>{$value['nome']}</option>";
+                        }
+                    echo "</select><br>";
+                    //echo "<br>";
+                    echo "<label>Dai un voto:</label><br>";
+                    echo "<div>";
+                        for ($i=1; $i < 6; $i++) { 
+                            echo "<input class='normalInput' id='voto = $i' type='radio' name='voto' value='$i'>"; 
+                            echo "<label class='labelStar' for='voto = $i'>$i <i class='bi bi-star'></i></label>";
+                        }
+                    echo "</div>";
+                    echo "<br>";
+                    echo "<input class='sendButton' type='submit' value='Send review'>";
+                echo "</form>";
             echo "</div>";
         }
     ?>
