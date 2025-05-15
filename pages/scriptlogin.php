@@ -24,7 +24,7 @@
         $pass = $_POST["password"];
         $password = hash("sha256",$pass);
 
-        $sql = "SELECT u.username, u.passwd FROM `utente` as u";
+        $sql = "SELECT u.username, u.passwd, u.isadmin FROM `utente` as u";
         $res = $conn->query($sql);
         
             while ($row = $res->fetch_assoc()) {
@@ -35,8 +35,13 @@
                     foreach ($utenti as $utente) {
                         if (($utente["username"] === $username) && ($utente["passwd"] === $password)) {
                             $_SESSION["utente"] = $username;
-                            header("Location: benvenuto.php");
-                            exit;
+                            if ($utente["isadmin"]) {
+                                header("Location: pannelloadmin.php");
+                                exit;
+                            } else {
+                                header("Location: benvenuto.php");
+                                exit;
+                            }
                         }
                     }
                     $_SESSION["mesErrore"] = "Username & Password non compatibili";

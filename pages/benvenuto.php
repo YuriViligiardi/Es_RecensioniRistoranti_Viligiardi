@@ -32,7 +32,7 @@
             showData($row, $row2['numRecensioni'], $res3);
 
             $listRest = [];
-            $sql4 = "SELECT r.nome FROM `ristorante` as r";
+            $sql4 = "SELECT r.codice, r.nome FROM `ristorante` as r";
             $res4 = $conn->query($sql4);
                 while ($row4 = $res4->fetch_assoc()) {
                     $listRest[] = $row4;
@@ -75,9 +75,9 @@
                     echo "<br>";
                     if (isset($_SESSION["resultInsertRec"])) {
                         if ($_SESSION["statusResult"]) {
-                            echo "<p class='correct'><b><i>" . $_SESSION["resultInsertRec"] . "</i></b></p>";
+                            echo "<p><b><i class='correct'>" . $_SESSION["resultInsertRec"] . "</i></b></p>";
                         } else {
-                            echo "<p class='error'><b><i>" . $_SESSION["resultInsertRec"] . "</i></b></p>";
+                            echo "<p><b><i class='error'>" . $_SESSION["resultInsertRec"] . "</i></b></p>";
                         }
                         unset($_SESSION["resultInsertRec"]);
                         unset($_SESSION["statusResult"]);
@@ -93,9 +93,9 @@
                 echo "<h1>NUOVA RECENSIONE</h1>";
                 echo "<form action='inseriscirecensione.php' method='post'>";
                 echo "<label>Scegli un ristorante:</label><br>";
-                    echo "<select id='ristorante' name='ristorante' class='styled-select'>";
+                    echo "<select name='ristorante' class='styled-select'>";
                         foreach ($lr as $value) {
-                            echo "<option value='{$value['nome']}'>{$value['nome']}</option>";
+                            echo "<option value='{$value['codice']}'>{$value['nome']}</option>";
                         }
                     echo "</select><br>";
                     //echo "<br>";
