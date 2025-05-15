@@ -27,20 +27,22 @@
             $sql2 = "SELECT COUNT(r.idrecensione) numRecensioni FROM recensione r JOIN utente u ON r.idutente = u.id WHERE u.username = '" . $_SESSION["utente"] . "'";
             $res2 = $conn->query($sql2);
             $row2 = $res2->fetch_assoc();
-            showData($row, $row2['numRecensioni']);
+            $sql3 = "SELECT rt.nome, rt.indirizzo, r.voto, r.data FROM `recensione` as r JOIN `ristorante` as rt ON r.codiceristorante = rt.codice JOIN `utente` as u ON u.id = r.idutente WHERE u.username = '" . $ut . "'";
+            $res3 = $conn->query($sql3);
+            showData($row, $row2['numRecensioni'], $res3);
 
             $listRest = [];
-            $sql3 = "SELECT r.nome FROM `ristorante` as r";
-            $res3 = $conn->query($sql3);
-                while ($row3 = $res3->fetch_assoc()) {
-                    $listRest[] = $row3;
+            $sql4 = "SELECT r.nome FROM `ristorante` as r";
+            $res4 = $conn->query($sql4);
+                while ($row4 = $res4->fetch_assoc()) {
+                    $listRest[] = $row4;
                 }
             createNewRec($listRest);
         }
         
         //Funzione per mostrare il benvenuto (con parte grafica)
-        function showData($list, $nr) {
-            echo "<div class='divShowData'>";
+        function showData($list, $nr, $r) {
+            echo "<div class='divShowData divBenvenuto'>";
                     echo "<h1 class='correct'>BENVENUTO " . $_SESSION["utente"] . "!</h1>";
                     echo "<p><b><i>Dati Utente:</i></b></p>";
                         echo "<ul>";
@@ -50,14 +52,35 @@
                         echo "</ul>";
                     if ($nr == 0) {
                         echo "<br>";
-                        echo "<p><b><i>Nessuna recensione effettuata!</i></b></p>"; 
+                        echo "<p><b><i>Nessuna recensione effettuata!</i></b></p>";
                     } else {
-                        // echo "<p><b>Numero recensioni effettuate: </b> $nr</p>";
-                        // echo "<table>";
-                        //     echo "<tr>";
-
-                        //     echo "</tr>";
-                        // echo "</table>";
+                        echo "<p><b>Numero recensioni effettuate: </b> $nr</p>";
+                        echo "<table>";
+                            echo "<tr>";
+                                echo "<th>NomeRistorante</th>";
+                                echo "<th>Indirizzo</th>";
+                                echo "<th>Voto</th>";
+                                echo "<th>Data</th>";
+                            echo "</tr>";
+                            while ($row = $r->fetch_assoc()) { 
+                                echo "<tr>";
+                                    echo "<td>" . $row["nome"] . "</td>";
+                                    echo "<td>" . $row["indirizzo"] . "</td>";
+                                    echo "<td>" . $row["voto"] . "</td>";
+                                    echo "<td>" . $row["data"] . "</td>";
+                                echo "</tr>";
+                            }
+                        echo "</table>"; 
+                    }
+                    echo "<br>";
+                    if (isset($_SESSION["resultInsertRec"])) {
+                        if ($_SESSION["statusResult"]) {
+                            echo "<p class='correct'><b><i>" . $_SESSION["resultInsertRec"] . "</i></b></p>";
+                        } else {
+                            echo "<p class='error'><b><i>" . $_SESSION["resultInsertRec"] . "</i></b></p>";
+                        }
+                        unset($_SESSION["resultInsertRec"]);
+                        unset($_SESSION["statusResult"]);
                     }
                     echo "<br>";
                     echo "<a class='sendButton' href='scriptlogout.php'>Logout</a>";
@@ -66,11 +89,11 @@
 
         //Funzione per mostrare la form per la creazione di una nuova recensione (con parte grafica)
         function createNewRec($lr){
-            echo "<div class='divShowData title'>";
+            echo "<div class='divShowData divRecensione title'>";
                 echo "<h1>NUOVA RECENSIONE</h1>";
                 echo "<form action='inseriscirecensione.php' method='post'>";
                 echo "<label>Scegli un ristorante:</label><br>";
-                    echo "<select id='ristorante' class='styled-select'>";
+                    echo "<select id='ristorante' name='ristorante' class='styled-select'>";
                         foreach ($lr as $value) {
                             echo "<option value='{$value['nome']}'>{$value['nome']}</option>";
                         }
