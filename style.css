@@ -91,6 +91,10 @@ body {
     margin-left: 70px;
 }
 
+.divRistorante {
+    margin-left: 70px;
+}
+
 .startTable {
     text-align: center;
     border: 1px solid black;
@@ -204,6 +208,23 @@ input {
 }
 
 .divBenvenuto td {
+    border: 2px solid rgba(167, 139, 250);
+    padding: 5px;
+}
+
+.divTable table, tr {
+    border: 2px solid rgba(167, 139, 250);
+    border-collapse: collapse;
+    margin: auto;
+    color: white;
+}
+
+.divTable th {
+    border: 2px solid rgba(167, 139, 250);
+    padding: 5px;
+}
+
+.divTable td {
     border: 2px solid rgba(167, 139, 250);
     padding: 5px;
 }
