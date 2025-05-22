@@ -29,7 +29,6 @@
             $row2 = $res2->fetch_assoc();
             $sql3 = "SELECT rt.nome, rt.indirizzo, r.voto, r.data FROM `recensione` as r JOIN `ristorante` as rt ON r.codiceristorante = rt.codice JOIN `utente` as u ON u.id = r.idutente WHERE u.username = '" . $ut . "'";
             $res3 = $conn->query($sql3);
-            showData($row, $row2['numRecensioni'], $res3);
 
             $listRest = [];
             $sql4 = "SELECT r.codice, r.nome FROM `ristorante` as r";
@@ -37,12 +36,13 @@
                 while ($row4 = $res4->fetch_assoc()) {
                     $listRest[] = $row4;
                 }
+            showData($row, $row2['numRecensioni'], $res3, $listRest);
             createNewRec($listRest);
         }
         
         //Funzione per mostrare il benvenuto (con parte grafica)
-        function showData($list, $nr, $r) {
-            echo "<div class='divShowData divBenvenuto'>";
+        function showData($list, $nr, $r, $lr) {
+            echo "<div class='divShowData divBenvenuto title'>";
                     echo "<h1 class='correct'>BENVENUTO " . $_SESSION["utente"] . "!</h1>";
                     echo "<p><b><i>Dati Utente:</i></b></p>";
                         echo "<ul>";
@@ -82,7 +82,12 @@
                         unset($_SESSION["resultInsertRec"]);
                         unset($_SESSION["statusResult"]);
                     }
-                    echo "<br>";
+                    echo "<div>";
+                        echo "<form action='info_ristorante.php' method='post'>";
+                            selectRest($lr);
+                            echo "<input class='sendButton' type='submit' value='Show info'>";
+                        echo "</form>";
+                    echo "</div>";
                     echo "<a class='sendButton' href='scriptlogout.php'>Logout</a>";
             echo "</div>";
         }
@@ -92,13 +97,7 @@
             echo "<div class='divShowData divRecensione title'>";
                 echo "<h1>NUOVA RECENSIONE</h1>";
                 echo "<form action='inseriscirecensione.php' method='post'>";
-                echo "<label>Scegli un ristorante:</label><br>";
-                    echo "<select name='ristorante' class='styled-select'>";
-                        foreach ($lr as $value) {
-                            echo "<option value='{$value['codice']}'>{$value['nome']}</option>";
-                        }
-                    echo "</select><br>";
-                    //echo "<br>";
+                    selectRest($lr);
                     echo "<label>Dai un voto:</label><br>";
                     echo "<div>";
                         for ($i=1; $i < 6; $i++) { 
@@ -110,6 +109,16 @@
                     echo "<input class='sendButton' type='submit' value='Send review'>";
                 echo "</form>";
             echo "</div>";
+        }
+
+        function selectRest($lr){
+            echo "<label>Scegli un ristorante:</label><br>";
+            echo "<select name='ristorante' class='styled-select'>";
+                foreach ($lr as $value) {
+                    echo "<option value='{$value['codice']}'>{$value['nome']}</option>";
+                }
+            echo "</select>";
+            echo "<br>";
         }
     ?>
 
